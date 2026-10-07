@@ -1,0 +1,91 @@
+# ==========================================
+# PYTHON
+# ==========================================
+# Archivos de bytes compilados
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Extensiones C
+*.so
+
+# Distribuciones y empaquetado
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Instalación en modo editable (PEP 660)
+.editable_egg_2/
+
+# Informes de cobertura de pruebas y análisis
+htmlcov/
+.toast/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.physa/
+.pytest_cache/
+.ruff_cache/
+.yamlfmt
+
+# Entornos virtuales (Recomendado usar nombres estándar)
+.venv/
+venv/
+ENV/
+env/
+_venv/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook (Archivos temporales de checkpoints)
+.ipynb_checkpoints
+
+# ==========================================
+# PYCHARM / JETBRAINS IDE
+# ==========================================
+# Ignora toda la carpeta .idea excepto los archivos de configuración compartidos si los hubiera
+.idea/
+
+# Si prefieres conservar diccionarios o configuraciones compartidas del equipo,
+# descomenta las siguientes líneas pero mantén el resto de .idea oculto:
+# !.idea/vcs.xml
+# !.idea/runConfigurations/
+
+# Archivos temporales de despliegue de PyCharm
+*.iml
+*.iws
+*.ipr
+
+# ==========================================
+# ARCHIVOS DE ENTORNO Y SECRETOS (¡CRÍTICO!)
+# ==========================================
+# Nunca subas contraseñas, tokens de API o configuraciones locales
+.env
+.env.local
+.env.*
+.secrets
+*.pem
+*.key
