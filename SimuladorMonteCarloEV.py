@@ -76,7 +76,7 @@ class SimuladorMonteCarloEV:
 
         return demanda_maxima, demanda_promedio, factor_carga, energia_total_kwh
 
-    def graficar_perfil(self):
+    def graficar_perfil(self, titulo_grafico: str):
         """Genera la visualización del perfil de carga apilado."""
         max_kw: float
         prom_kw: float
@@ -102,7 +102,7 @@ class SimuladorMonteCarloEV:
                          f"Energía Mensual: {energia / 1000:.2f} MWh")
 
         plt.title(
-            'Simulación Monte Carlo - Perfil de Carga',
+            'Perfil de Carga - ' + titulo_grafico,
             fontsize=14, pad=25)
         plt.suptitle(texto_resumen, fontsize=11, color='dimgrey', y=0.91)
 
