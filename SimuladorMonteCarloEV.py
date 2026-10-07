@@ -9,7 +9,7 @@ class SimuladorMonteCarloEV:
     Motor de simulación que gestiona el tiempo, agrega la demanda de múltiples
     segmentos de vehículos y extrae estadísticas del sistema.
     """
-    def __init__(self, dias=30, resolucion_minutos=5,
+    def __init__(self, dias, resolucion_minutos,
                  fecha_inicio="2024-01-01 00:00"):
         self.dias = dias
         self.resolucion_minutos = resolucion_minutos

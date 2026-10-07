@@ -6,10 +6,10 @@ if __name__ == "__main__":
     # Escenarios disponibles:
     # 'Conservador' | 'Tendencial' | 'Acelerado' | 'Sensibilidad' | 'Example'
     # Definir el escenario a evaluar
-    # ESCENARIO_ACTUAL = 'Conservador'
+    ESCENARIO_ACTUAL = 'Conservador'
     # ESCENARIO_ACTUAL = 'Tendencial'
     # ESCENARIO_ACTUAL = 'Acelerado'
-    ESCENARIO_ACTUAL = 'Sensibilidad'
+    # ESCENARIO_ACTUAL = 'Sensibilidad'
     # ESCENARIO_ACTUAL = 'Example'
 
     # Instanciar el entorno de simulación

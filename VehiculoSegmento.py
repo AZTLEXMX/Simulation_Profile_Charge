@@ -6,7 +6,7 @@ class VehiculoSegmento:
     Encapsula las características físicas y el comportamiento estocástico individual.
     """
     def __init__(self, nombre, cap_bat_kwh, consumo_kwh_km, p_max_ac_kw,
-                 cantidad, perfil_uso,
+                 cantidad, perfil_uso, distancia_media=113.0, distancia_std=28.0,
                  limite_descarga=0.90, eficiencia_ac=0.92):
         self.nombre = nombre
         self.cap_bat = cap_bat_kwh
@@ -14,17 +14,27 @@ class VehiculoSegmento:
         self.p_max_ac = p_max_ac_kw
         self.cantidad = cantidad
         self.perfil_uso = perfil_uso
+        self.distancia_media = distancia_media
+        self.distancia_std = distancia_std
         self.cap_neta = cap_bat_kwh * limite_descarga
         self.eficiencia_ac = eficiencia_ac
 
+
     def _generar_distancia_diaria(self):
-        """Genera la distancia recorrida basada en distribuciones estadísticas según el perfil."""
+        """Genera la distancia basada en los parámetros dinámicos de entrada."""
         if self.perfil_uso == 'Privado':
-            # Distribución Log-normal: mayoría de viajes cortos, pocos viajes muy largos
-            dist = np.random.lognormal(mean=3.3, sigma=0.5)
+            # Conversión de Media y Desviación Estándar a parámetros mu y sigma de Log-normal
+            varianza = self.distancia_std ** 2
+            sigma_log = np.sqrt(
+                np.log((varianza / (self.distancia_media ** 2)) + 1))
+            mu_log = np.log(self.distancia_media) - (sigma_log ** 2) / 2
+
+            dist = np.random.lognormal(mean=mu_log, sigma=sigma_log)
         else:
-            # Distribución Normal: rutas de flotilla más predecibles
-            dist = np.random.normal(loc=50.0, scale=15.0)
+            # Distribución Normal directa para flotillas
+            dist = np.random.normal(loc=self.distancia_media,
+                                    scale=self.distancia_std)
+
         return max(0, dist)
 
     def simular_unidad(self, dias_simulacion, intervalos_por_dia,
@@ -68,11 +78,9 @@ class VehiculoSegmento:
                     if idx < total_intervalos:
                         # Ajuste proporcional para el último intervalo de carga
                         if i == intervalos_necesarios - 1:
-                            fraccion = (
-                                                   horas_necesarias * intervalos_por_hora) - int(
+                            fraccion = (horas_necesarias * intervalos_por_hora) - int(
                                 horas_necesarias * intervalos_por_hora)
-                            perfil_potencia[idx] += (
-                                        potencia_red * fraccion) if fraccion > 0 else potencia_red
+                            perfil_potencia[idx] += (potencia_red * fraccion) if fraccion > 0 else potencia_red
                         else:
                             perfil_potencia[idx] += potencia_red
 
