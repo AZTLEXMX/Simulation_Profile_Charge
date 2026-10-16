@@ -20,21 +20,28 @@ def cargar_escenario(simulador, tipo_escenario):
                              34.04,
                              0.105,
                              6.6,
-                             2,
+                             1,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('Tesla Model Y',
                              69.50,
                              0.146,
                              11.0,
-                             2,
+                             1,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('Tesla Model 3',
+                             69.50,
+                             0.134,
+                             11.0,
+                             1,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('JAC E10X',
                              31.40,
                              0.105,
                              6.6,
-                             2,
+                             1,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('Volvo EX30',
@@ -48,6 +55,20 @@ def cargar_escenario(simulador, tipo_escenario):
                              64.00,
                              0.150,
                              11.0,
+                             1,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('BYD Yuan Plus',
+                             55.19,
+                             0.125,
+                             7.0,
+                             1,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('Chevrolet Equinox EV',
+                             85.00,
+                             0.185,
+                             11.5,
                              1,
                              'Privado'))
         simulador.agregar_segmento(
@@ -72,12 +93,19 @@ def cargar_escenario(simulador, tipo_escenario):
                              34.04,
                              0.105,
                              6.6,
-                             3,
+                             1,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('Tesla Model Y',
                              69.50,
                              0.146,
+                             11.0,
+                             1,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('Tesla Model 3',
+                             69.50,
+                             0.134,
                              11.0,
                              2,
                              'Privado'))
@@ -86,20 +114,34 @@ def cargar_escenario(simulador, tipo_escenario):
                              31.40,
                              0.105,
                              6.6,
-                             2,
+                             1,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('Volvo EX30',
                              60.00,
                              0.160,
                              11.0,
-                             2,
+                             1,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('MG4 Electric',
                              64.00,
                              0.150,
                              11.0,
+                             1,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('BYD Yuan Plus',
+                             55.19,
+                             0.125,
+                             7.0,
+                             2,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('Chevrolet Equinox EV',
+                             85.00,
+                             0.185,
+                             11.5,
                              1,
                              'Privado'))
         simulador.agregar_segmento(
@@ -124,21 +166,28 @@ def cargar_escenario(simulador, tipo_escenario):
                              34.04,
                              0.105,
                              6.6,
-                             4,
+                             3,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('Tesla Model Y',
                              69.50,
                              0.146,
                              11.0,
-                             3,
+                             1,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('Tesla Model 3',
+                             69.50,
+                             0.134,
+                             11.0,
+                             1,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('JAC E10X',
                              31.40,
                              0.105,
                              6.6,
-                             3,
+                             2,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('Volvo EX30',
@@ -155,6 +204,20 @@ def cargar_escenario(simulador, tipo_escenario):
                              1,
                              'Privado'))
         simulador.agregar_segmento(
+            VehiculoSegmento('BYD Yuan Plus',
+                             55.19,
+                             0.125,
+                             7.0,
+                             2,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('Chevrolet Equinox EV',
+                             85.00,
+                             0.185,
+                             11.5,
+                             1,
+                             'Privado'))
+        simulador.agregar_segmento(
             VehiculoSegmento('Geely EX5 EV',
                              60.22,
                              0.145,
@@ -163,7 +226,7 @@ def cargar_escenario(simulador, tipo_escenario):
                              'Privado'))
 
     elif tipo_escenario == 'Sensibilidad':
-        # Volumen arbitrario superior para estresar el transformador (Ej. 30 VE, 10 PHEV)
+        # Total: 35 VE, 10 PHEV
         simulador.agregar_segmento(
             VehiculoSegmento('BYD King (PHEV)',
                              24.57,
@@ -183,14 +246,21 @@ def cargar_escenario(simulador, tipo_escenario):
                              69.50,
                              0.146,
                              11.0,
-                             6,
+                             5,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('Tesla Model 3',
+                             69.50,
+                             0.134,
+                             11.0,
+                             4,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('JAC E10X',
                              31.40,
                              0.105,
                              6.6,
-                             6,
+                             2,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('Volvo EX30',
@@ -204,14 +274,28 @@ def cargar_escenario(simulador, tipo_escenario):
                              64.00,
                              0.150,
                              11.0,
-                             3,
+                             2,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('BYD Yuan Plus',
+                             55.19,
+                             0.125,
+                             7.0,
+                             4,
+                             'Privado'))
+        simulador.agregar_segmento(
+            VehiculoSegmento('Chevrolet Equinox EV',
+                             85.00,
+                             0.185,
+                             11.5,
+                             4,
                              'Privado'))
         simulador.agregar_segmento(
             VehiculoSegmento('Geely EX5 EV',
                              60.22,
                              0.145,
                              11.0,
-                             3,
+                             2,
                              'Privado'))
 
     elif tipo_escenario == 'Example':
