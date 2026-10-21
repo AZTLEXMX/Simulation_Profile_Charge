@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prelectrics"
+version = "1.0.0"
+description = "Simulador Estocástico de Perfiles de Carga de VE y PHEV"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "numpy",
+    "pandas",
+    "matplotlib"
+]
+
+[tool.setuptools]
+py-modules = ["main", "escenarios", "SimuladorMonteCarloEV", "VehiculoSegmento"]
+
+[project.scripts]
+prelectrics = "main:main"

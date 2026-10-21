@@ -1,33 +1,57 @@
+import argparse
 from SimuladorMonteCarloEV import SimuladorMonteCarloEV
-from escenarios import cargar_escenario
+from escenarios import cargar_escenario, CONFIGURACION_ESCENARIOS
 
 
-if __name__ == "__main__":
-    # Escenarios disponibles:
-    # 'Conservador' | 'Tendencial' | 'Acelerado' | 'Sensibilidad' | 'Example'
-    # Definir el escenario a evaluar
-    # ESCENARIO_ACTUAL = 'Conservador'
-    # ESCENARIO_ACTUAL = 'Tendencial'
-    # ESCENARIO_ACTUAL = 'Acelerado'
-    ESCENARIO_ACTUAL = 'Sensibilidad'
-    # ESCENARIO_ACTUAL = 'Example'
+def main():
+    parser = argparse.ArgumentParser(
+        prog="prelectrics",
+        description="Simulador Estocástico de Perfiles de Carga de Vehículos Eléctricos (VE y PHEV)."
+    )
 
-    # Parámetro de temperatura media mensual (°C)
-    # Ej. CDMX Invierno (Enero): ~13.5 °C | Primavera (Mayo): ~19.5 °C
-    TEMPERATURA_AMBIENTE = 13.5
+    # Argumento obligatorio: Escenario
+    parser.add_argument(
+        "-e", "--escenario",
+        type=str,
+        required=True,
+        choices=list(CONFIGURACION_ESCENARIOS.keys()),
+        help="Escenario de penetración a evaluar."
+    )
 
-    # Instanciar el entorno de simulación
+    # Argumento opcional: Temperatura ambiente
+    parser.add_argument(
+        "-t", "--temperatura",
+        type=float,
+        default=16.0,
+        help="Temperatura ambiente media en °C, por defecto: 16.0 °C."
+    )
+
+    # Argumento opcional: Días simulados
+    parser.add_argument(
+        "-d", "--dias",
+        type=int,
+        default=30,
+        help="Cantidad de días a simular, por defecto: 30 días."
+    )
+
+    args = parser.parse_args()
+
+    # Instanciar el entorno de simulación con los parámetros recibidos de la terminal
     simulador = SimuladorMonteCarloEV(
-        dias=30,
+        dias=args.dias,
         resolucion_minutos=5,
-        temperatura_c=13.5
+        temperatura_c=args.temperatura
     )
 
     # Cargar la configuración de la flota
-    cargar_escenario(simulador, ESCENARIO_ACTUAL)
+    cargar_escenario(simulador, args.escenario)
 
     # Ejecutar el motor estocástico
     simulador.ejecutar()
 
     # Generar métricas y gráfica
-    simulador.graficar_perfil(titulo_grafico=ESCENARIO_ACTUAL)
+    simulador.graficar_perfil(titulo_grafico=args.escenario)
+
+
+if __name__ == "__main__":
+    main()
