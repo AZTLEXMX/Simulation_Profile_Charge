@@ -12,8 +12,16 @@ if __name__ == "__main__":
     ESCENARIO_ACTUAL = 'Sensibilidad'
     # ESCENARIO_ACTUAL = 'Example'
 
+    # Parámetro de temperatura media mensual (°C)
+    # Ej. CDMX Invierno (Enero): ~13.5 °C | Primavera (Mayo): ~19.5 °C
+    TEMPERATURA_AMBIENTE = 13.5
+
     # Instanciar el entorno de simulación
-    simulador = SimuladorMonteCarloEV(dias=30, resolucion_minutos=5)
+    simulador = SimuladorMonteCarloEV(
+        dias=30,
+        resolucion_minutos=5,
+        temperatura_c=13.5
+    )
 
     # Cargar la configuración de la flota
     cargar_escenario(simulador, ESCENARIO_ACTUAL)

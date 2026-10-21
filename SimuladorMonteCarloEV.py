@@ -9,15 +9,15 @@ class SimuladorMonteCarloEV:
     Motor de simulación que gestiona el tiempo, agrega la demanda de múltiples
     segmentos de vehículos y extrae estadísticas del sistema.
     """
-    def __init__(self, dias, resolucion_minutos,
+    def __init__(self, dias, resolucion_minutos, temperatura_c=17.0,
                  fecha_inicio="2024-01-01 00:00"):
         self.dias = dias
         self.resolucion_minutos = resolucion_minutos
+        self.temperatura_c = temperatura_c
         self.intervalos_por_hora = 60 // resolucion_minutos
         self.intervalos_por_dia = 24 * self.intervalos_por_hora
         self.total_intervalos = self.dias * self.intervalos_por_dia
         self.fecha_inicio = fecha_inicio
-
         self.segmentos = []
         self.resultados_df = None
         self.demanda_total = None
@@ -27,7 +27,6 @@ class SimuladorMonteCarloEV:
 
     def ejecutar(self):
         """Itera sobre la flota y consolida la matriz de potencia temporal."""
-        # np.random.seed(42) # Agregar en caso de requerir un solo resultado siempre
         rango_tiempo = pd.date_range(start=self.fecha_inicio,
                                      periods=self.total_intervalos,
                                      freq=f"{self.resolucion_minutos}min")
@@ -37,11 +36,11 @@ class SimuladorMonteCarloEV:
             potencia_agregada_segmento = np.zeros(self.total_intervalos)
 
             for _ in range(segmento.cantidad):
+                # Se inyecta self.temperatura_c a cada unidad simulada
                 potencia_agregada_segmento += segmento.simular_unidad(
                     self.dias, self.intervalos_por_dia,
-                    self.intervalos_por_hora
+                    self.intervalos_por_hora, self.temperatura_c
                 )
-
             self.resultados_df[segmento.nombre] = potencia_agregada_segmento
 
         self.demanda_total = self.resultados_df.sum(axis=1)
@@ -67,6 +66,7 @@ class SimuladorMonteCarloEV:
         print("=" * 45)
         print(" RESUMEN DE SIMULACIÓN MENSUAL ")
         print("=" * 45)
+        print(f"Temperatura Ambiente:       {self.temperatura_c:.1f} °C")
         print(f"Demanda Máxima Coincidente: {demanda_maxima:.2f} kW")
         print(f"Demanda Promedio:           {demanda_promedio:.2f} kW")
         print(f"Demanda Mínima (Valle):     {demanda_minima:.2f} kW")
@@ -96,7 +96,8 @@ class SimuladorMonteCarloEV:
                       labels=self.resultados_df.columns,
                       alpha=0.8)
 
-        texto_resumen = (f"Demanda Max: {max_kw:.1f} kW | "
+        texto_resumen = (f"Temp: {self.temperatura_c:.1f}°C | "
+                         f"Demanda Max: {max_kw:.1f} kW | "
                          f"Demanda Prom: {prom_kw:.1f} kW | "
                          f"Factor Carga: {factor:.1f}% | "
                          f"Energía Mensual: {energia / 1000:.2f} MWh")
